@@ -1,5 +1,12 @@
 import { Menu } from "@grammyjs/menu";
-import { Bot, Context, session, SessionFlavor } from "grammy";
+import {
+  Bot,
+  Context,
+  GrammyError,
+  HttpError,
+  session,
+  SessionFlavor,
+} from "grammy";
 import { Low } from "lowdb";
 import { JSONFilePreset } from "lowdb/node";
 import { CONFIG } from "./config.js";
@@ -92,16 +99,17 @@ bot.on("message:text", async (ctx) => {
   ctx.reply(message);
 });
 
-// Reply to any message with "Hi there!".
-/*bot.on("message", (ctx) => {
-  console.log(ctx);
-  console.log(ctx.chat);
-  ctx.reply("Hi there!", {
-    reply_markup: menu,
-  });
-  setTimeout(() => {
-    ctx.api.sendMessage(ctx.chat.id, "Муахахаха!");
-  }, 3000);
-});*/
+bot.catch((err) => {
+  const ctx = err.ctx;
+  console.error(`Ошибка при обработке обновления ${ctx.update.update_id}:`);
+  const e = err.error;
+  if (e instanceof GrammyError) {
+    console.error("Ошибка в запросе:", e.description);
+  } else if (e instanceof HttpError) {
+    console.error("Не удалось связаться с Telegram:", e);
+  } else {
+    console.error("Неизвестная ошибка:", e);
+  }
+});
 
 bot.start();
