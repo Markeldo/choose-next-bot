@@ -13,8 +13,16 @@ initDB().then((result) => {
 });
 
 export const addUser = async (user: User) => {
-  await db.data.users.push(user);
+  if (
+    db.data.users.find(
+      ({ name, chatId }) => name === user.name && chatId === user.chatId
+    )
+  ) {
+    return false;
+  }
+  db.data.users.push(user);
   await db.write();
+  return true;
 };
 
 export const getUsersOfChat = (chatId: number) => {

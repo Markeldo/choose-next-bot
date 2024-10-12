@@ -1,7 +1,7 @@
 export type User = {
   name: string;
   chatId: number;
-  lastPicked?: string;
+  lastPicked?: number;
 };
 
 export type Data = {

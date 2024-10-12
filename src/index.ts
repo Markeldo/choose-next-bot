@@ -23,7 +23,11 @@ bot.on("::mention", async (ctx) => {
   }
 
   if (text && isValidTelegramAccount(text)) {
-    await addUser({ name: text, chatId: ctx.chat.id });
+    const result = await addUser({ name: text, chatId: ctx.chat.id });
+
+    if (!result) {
+      message = `Пользователь с ником ${text} уже был добавлены в игру ранее. Отмена действия`;
+    }
   } else {
     message = "Что-то пошло не так. *Добавление отменено.*";
   }
