@@ -1,10 +1,14 @@
 import { merge } from "es-toolkit";
-import configData from "../config.json";
+//import configData from "../config.json";
 
-const DEFAULT_CONFIG = {
+import dotenv from "dotenv";
+
+dotenv.config();
+
+export const CONFIG = {
   TELEGRAM: {
-    TOKEN: "unknown",
+    TOKEN: process.env.TELEGRAM_TOKEN,
   },
 } as const;
 
-export const CONFIG = merge(DEFAULT_CONFIG, configData);
+// export const CONFIG = merge(DEFAULT_CONFIG, configData);
