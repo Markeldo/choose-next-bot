@@ -5,6 +5,9 @@ import { MENU, addUser } from "./model";
 import { commands } from "./commands";
 import { isValidTelegramAccount } from "utils";
 
+if (!CONFIG.TELEGRAM.TOKEN) {
+  throw new Error("Oh, so bad");
+}
 const bot = new Bot<MyContext>(CONFIG.TELEGRAM.TOKEN);
 bot.use(session({ initial: (): SessionData => ({ expectingAccount: false }) }));
 
