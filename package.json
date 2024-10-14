@@ -1,16 +1,16 @@
 {
   "name": "telegram-bot",
   "version": "1.0.0",
-  "exports": "./index.js",
+  "exports": "./bot.js",
   "type": "module",
   "engines": {
     "node": ">=18"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec tsx src/index.ts",
-    "start": "tsx src/index.ts",
-    "build": "ncc build src/index.ts -o dist"
+    "dev": "nodemon --exec tsx src/bot.ts",
+    "start": "tsx src/bot.ts",
+    "build": "ncc build src/bot.ts -o dist"
   },
   "keywords": [],
   "author": "",
