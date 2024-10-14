@@ -1,5 +1,5 @@
 import { Low } from "lowdb";
-import { JSONFilePreset } from "lowdb/lib/node";
+import { JSONFilePreset } from "lowdb/node";
 import { Data, User } from "../types";
 export * from "./constants";
 
