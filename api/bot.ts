@@ -3,7 +3,7 @@ import { CONFIG } from "./config";
 import { MyContext, SessionData } from "./types";
 import { MENU, addUser } from "./model";
 import { commands } from "./commands";
-import { isValidTelegramAccount } from "utils";
+import { isValidTelegramAccount } from "./utils";
 
 if (!CONFIG.TELEGRAM.TOKEN) {
   throw new Error("Oh, so bad");

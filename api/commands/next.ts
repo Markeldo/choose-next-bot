@@ -1,6 +1,6 @@
 import { Composer } from "grammy";
 import { MyContext } from "../types";
-import { db, getUsersOfChat } from "model";
+import { db, getUsersOfChat } from "../model";
 import { random, sortBy } from "es-toolkit";
 
 const nextComposer = new Composer<MyContext>();

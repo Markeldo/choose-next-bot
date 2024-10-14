@@ -1,6 +1,6 @@
 import { Composer } from "grammy";
 import { MyContext } from "../types";
-import { addUser } from "model";
+import { addUser } from "../model";
 
 const addSelfComposer = new Composer<MyContext>();
 
