@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec tsx api/bot.ts",
     "start": "tsx api/bot.ts",
-    "build": "ncc build api/bot.ts -o dist"
+    "build": "ncc build api/bot.ts -o build"
   },
   "keywords": [],
   "author": "",

@@ -5,3 +5,4 @@ node_modules
 src/db.json
 .env
 /dist
+/build
