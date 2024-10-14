@@ -1,6 +1,6 @@
 import { Low } from "lowdb";
+import { JSONFilePreset } from "lowdb/lib/node";
 import { Data, User } from "../types";
-import { JSONFilePreset } from "lowdb/node";
 export * from "./constants";
 
 const defaultData = { users: [] };
