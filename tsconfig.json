@@ -8,14 +8,14 @@
     "moduleResolution": "node",
     //"module": "node16",
     //"moduleResolution": "node16",
-    "rootDir": "./src",
-    "outDir": "./dist",
+    "rootDir": "./api",
+    "outDir": "./build",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "baseUrl": "src",
+    "baseUrl": "api",
     "paths": {
       "@types/*": ["types/*"]
     },
@@ -23,6 +23,6 @@
     "allowSyntheticDefaultImports": true,
     "allowJs": true
   },
-  "include": ["./src/**/*"],
+  "include": ["./api/**/*"],
   "exclude": ["node_modules"]
 }

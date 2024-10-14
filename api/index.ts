@@ -1,4 +1,4 @@
-import { Bot, GrammyError, HttpError, session } from "grammy";
+import { Bot, GrammyError, HttpError, session, webhookCallback } from "grammy";
 import { CONFIG } from "./config";
 import { MyContext, SessionData } from "./types";
 import { MENU, addUser } from "./model";
@@ -54,4 +54,11 @@ bot.catch((err) => {
     console.error("Неизвестная ошибка:", e);
   }
 });
-bot.start();
+
+//bot.start();
+
+export default webhookCallback(bot, "std/http");
+
+export const config = {
+  runtime: "edge",
+};
