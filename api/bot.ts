@@ -61,5 +61,5 @@ if (CONFIG.ENV === "dev") {
 export default webhookCallback(bot, "std/http");
 
 export const config = {
-  runtime: "edge",
+  runtime: "nodejs",
 };
