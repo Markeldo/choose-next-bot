@@ -6,7 +6,7 @@ export * from "./constants";
 const defaultData = { users: [] };
 let db: Low<Data>;
 async function initDB() {
-  return await JSONFilePreset<Data>("./src/db.json", defaultData);
+  return await JSONFilePreset<Data>("./api/model/db.json", defaultData);
 }
 initDB().then((result) => {
   db = result;

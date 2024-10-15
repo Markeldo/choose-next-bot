@@ -55,10 +55,11 @@ bot.catch((err) => {
   }
 });
 
-//bot.start();
+bot.start();
 
-export default webhookCallback(bot, "std/http");
+/*export default webhookCallback(bot, "std/http");
 
 export const config = {
   runtime: "edge",
 };
+*/
