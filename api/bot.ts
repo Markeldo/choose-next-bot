@@ -55,8 +55,9 @@ bot.catch((err) => {
   }
 });
 
-// bot.start();
-
+if (CONFIG.ENV === "dev") {
+  bot.start();
+}
 export default webhookCallback(bot, "std/http");
 
 export const config = {

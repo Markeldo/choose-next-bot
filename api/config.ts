@@ -4,8 +4,8 @@ import { merge } from "es-toolkit";
 import dotenv from "dotenv";
 
 dotenv.config();
-
 export const CONFIG = {
+  ENV: process.env.ENVIRONMENT || "prod",
   TELEGRAM: {
     TOKEN: process.env.TELEGRAM_TOKEN,
   },

@@ -1,6 +1,6 @@
 import { Composer } from "grammy";
 import { MyContext } from "../types";
-import { db, getUsersOfChat } from "../model";
+import { db, getUsersOfChat, updateUserByName } from "../model";
 import { random, sortBy } from "es-toolkit";
 
 const nextComposer = new Composer<MyContext>();
@@ -33,8 +33,8 @@ nextComposer.command("next", async (ctx) => {
       await ctx.reply(`Следующим к доске вызывается ${selectedUser.name}`),
     2000
   );
-  selectedUser.lastPicked = Date.now();
-  db.write();
+  const lastPicked = Date.now();
+  updateUserByName(selectedUser.name, lastPicked);
 });
 
 export { nextComposer };
