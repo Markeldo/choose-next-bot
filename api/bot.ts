@@ -60,6 +60,6 @@ if (CONFIG.ENV === "dev") {
 }
 export default webhookCallback(bot, "std/http");
 
-export const config = {
+/*export const config = {
   runtime: "nodejs",
-};
+};*/
