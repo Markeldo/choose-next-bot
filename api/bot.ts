@@ -59,23 +59,18 @@ bot.catch((err) => {
 if (CONFIG.ENV === "dev") {
   bot.start();
 }
-//export default webhookCallback(bot, "std/http");
+export default webhookCallback(bot, "express");
 
-const CURRENT_HOST = "";
+/*const CURRENT_HOST = "";
 const app = express();
 app.use(webhookCallback(bot, "express"));
 
 app.get("/", async (_req, res) => {
-  /*const url = `${CURRENT_HOST}/callback`;
-  await bot.telegram.setWebhook(url);*/
   res.send(`listening on ${CURRENT_HOST}`);
 });
 
-/*export const config = {
-  runtime: "nodejs",
-
-};*/
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Сервер запущен на http://localhost:${PORT}`);
 });
+*/
