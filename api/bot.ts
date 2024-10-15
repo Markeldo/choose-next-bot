@@ -1,9 +1,9 @@
 import { Bot, GrammyError, HttpError, session, webhookCallback } from "grammy";
-import { CONFIG } from "./config";
-import { MyContext, SessionData } from "./types";
-import { MENU, addUser } from "./model";
-import { commands } from "./commands";
-import { isValidTelegramAccount } from "./utils";
+import { MyContext, SessionData } from "../src/types";
+import { MENU, addUser } from "../src/model";
+import { commands } from "../src/commands";
+import { CONFIG } from "../src/config";
+import { isValidTelegramAccount } from "../src/utils";
 
 if (!CONFIG.TELEGRAM.TOKEN) {
   throw new Error("Oh, so bad");

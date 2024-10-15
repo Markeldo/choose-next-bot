@@ -6,7 +6,7 @@ export * from "./constants";
 import jsonfile from "jsonfile";
 import { cloneDeep } from "es-toolkit";
 
-const file = "./api/model/db.json";
+const file = "./src/model/db.json";
 
 const defaultData = { users: [] };
 /*let db: Low<Data>;

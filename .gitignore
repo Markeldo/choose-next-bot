@@ -2,8 +2,7 @@
 .thumbs.db
 /config.json
 node_modules
-/db.json
-/api/model/db.json
+/**/db.json
 .env
 /dist
 /build

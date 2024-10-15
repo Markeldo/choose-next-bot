@@ -8,7 +8,7 @@
     "moduleResolution": "node",
     //"module": "node16",
     //"moduleResolution": "node16",
-    "rootDir": "./api",
+    //"rootDir": "./api",
     "outDir": "./build",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -23,6 +23,6 @@
     "allowSyntheticDefaultImports": true,
     "allowJs": true
   },
-  "include": ["./api/**/*"],
+  "include": ["api/**/*.ts", "src/**/*.ts"],
   "exclude": ["node_modules"]
 }
