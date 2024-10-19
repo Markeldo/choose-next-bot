@@ -45,7 +45,9 @@ bot.on("callback_query:data", async (ctx) => {
     case "removeUser":
       try {
         await deleteUserByName(payload);
-        ctx.reply(`${payload} был удалён из списка игроков`);
+        ctx.reply(`${payload} был удалён из списка игроков`, {
+          parse_mode: "Markdown",
+        });
       } catch {
         ctx.reply("Не получилось удалить пользователя. Извиняй");
       }
