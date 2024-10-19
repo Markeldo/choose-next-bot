@@ -1,18 +1,21 @@
 import { Composer } from "grammy";
 import { MyContext } from "../types";
-import { db, getUsersOfChat } from "model";
+import { getUsersOfChat, updateUserByName } from "model";
 import { random, sortBy } from "es-toolkit";
+import { extractName } from "utils/extractName";
 
 const nextComposer = new Composer<MyContext>();
+
+const MIN_PARTICIPANTS_COUNT = 3;
 
 nextComposer.command("next", async (ctx) => {
   const chatId = ctx.chat.id;
   const users = sortBy(getUsersOfChat(chatId), [
     ({ lastPicked }) => lastPicked || 0,
-  ]).slice(0, 4);
-  if (users.length < 4) {
+  ]).slice(0, MIN_PARTICIPANTS_COUNT);
+  if (users.length < MIN_PARTICIPANTS_COUNT) {
     ctx.reply(
-      "Невозможно выбрать, потому что нет игроков или их слишком мало! Минимум - 4"
+      `Невозможно выбрать, потому что нет игроков или их слишком мало! Минимум - ${MIN_PARTICIPANTS_COUNT}`
     );
     return;
   }
@@ -25,16 +28,17 @@ nextComposer.command("next", async (ctx) => {
   }
   await ctx.reply(
     `Давненько сидят тихо ${users
-      .map(({ name }) => name.replace("@", ""))
+      .map(({ name }) => extractName(name))
       .join(", ")}. Так-так-так...`
   );
   setTimeout(
     async () =>
-      await ctx.reply(`Следующим к доске вызывается ${selectedUser.name}`),
+      await ctx.reply(`Следующим к доске вызывается ${selectedUser.name}`, {
+        parse_mode: "Markdown",
+      }),
     2000
   );
-  selectedUser.lastPicked = Date.now();
-  db.write();
+  updateUserByName(selectedUser.name, Date.now());
 });
 
 export { nextComposer };

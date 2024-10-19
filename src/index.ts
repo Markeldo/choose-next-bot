@@ -1,7 +1,7 @@
 import { Bot, GrammyError, HttpError, session } from "grammy";
 import { CONFIG } from "./config";
 import { MyContext, SessionData } from "./types";
-import { MENU, addUser } from "./model";
+import { MENU, addUser, deleteUserByName } from "./model";
 import { commands } from "./commands";
 import { isValidTelegramAccount } from "utils";
 
@@ -38,9 +38,22 @@ bot.on("::mention", async (ctx) => {
   ctx.reply(message);
 });
 
-// bot.on("message", () => {
-//   console.log("ssssss");
-// });
+bot.on("callback_query:data", async (ctx) => {
+  const [action, ...rest] = ctx.update.callback_query.data.split(" ");
+  const payload = rest.join(" ");
+  switch (action) {
+    case "removeUser":
+      try {
+        await deleteUserByName(payload);
+        ctx.reply(`${payload} был удалён из списка игроков`);
+      } catch {
+        ctx.reply("Не получилось удалить пользователя. Извиняй");
+      }
+      break;
+    default:
+      ctx.reply("Неизвестное действие. Ничего делать не буду");
+  }
+});
 
 bot.catch((err) => {
   const ctx = err.ctx;
