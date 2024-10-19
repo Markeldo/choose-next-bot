@@ -2,6 +2,6 @@
 .thumbs.db
 /config.json
 node_modules
-src/db.json
+**/db.json
 .env
 /dist
