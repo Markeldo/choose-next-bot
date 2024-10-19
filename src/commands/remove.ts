@@ -16,7 +16,7 @@ removeComposer.command("remove", async (ctx) => {
       keyboard = keyboard.row();
     }
   });
-  await ctx.reply("Выберите пользователя, которого надо исключить", {
+  await ctx.reply("Выберите участника, которого надо исключить", {
     reply_markup: keyboard,
   });
 });

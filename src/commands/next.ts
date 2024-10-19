@@ -15,7 +15,7 @@ nextComposer.command("next", async (ctx) => {
   ]).slice(0, MIN_PARTICIPANTS_COUNT);
   if (users.length < MIN_PARTICIPANTS_COUNT) {
     ctx.reply(
-      `Невозможно выбрать, потому что нет игроков или их слишком мало! Минимум - ${MIN_PARTICIPANTS_COUNT}`
+      `Невозможно выбрать, потому что нет игроков или их слишком мало! Минимум - ${MIN_PARTICIPANTS_COUNT} 🤕`
     );
     return;
   }
@@ -23,17 +23,17 @@ nextComposer.command("next", async (ctx) => {
   const selectedIndex = random(users.length - 1);
   const selectedUser = users.at(selectedIndex);
   if (!selectedUser) {
-    ctx.reply("Какая-то непонятная ошибка возникла. Попробуй ещё раз!");
+    ctx.reply("Какая-то непонятная ошибка возникла. Попробуй ещё раз! 🤕");
     return;
   }
   await ctx.reply(
     `Давненько сидят тихо ${users
       .map(({ name }) => extractName(name))
-      .join(", ")}. Так-так-так...`
+      .join(", ")}. Так-так-так... ⏳`
   );
   setTimeout(
     async () =>
-      await ctx.reply(`Следующим к доске вызывается ${selectedUser.name}`, {
+      await ctx.reply(`Следующим ведущим назначается ${selectedUser.name} 🤴`, {
         parse_mode: "Markdown",
       }),
     2000

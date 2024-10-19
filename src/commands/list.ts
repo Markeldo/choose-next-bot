@@ -13,9 +13,12 @@ composer.command(["list"], async (ctx) => {
         }`
     )
     .join("\n");
-  ctx.reply("*Кто в чате и когда вызывался к доске*\n\n" + result, {
-    parse_mode: "MarkdownV2",
-  });
+  ctx.reply(
+    "*📋 Список участников с датой последнего вызова к доске*\n\n" + result,
+    {
+      parse_mode: "MarkdownV2",
+    }
+  );
 });
 
 export { composer as listComposer };

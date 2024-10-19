@@ -6,7 +6,9 @@ import { commands } from "./commands";
 import { isValidTelegramAccount } from "utils";
 
 if (!CONFIG.TELEGRAM.TOKEN) {
-  throw new Error("Oh, so bad");
+  throw new Error(
+    "No token. Please create .env file in the root directory and set TELEGRAM_TOKEN variable there"
+  );
 }
 const bot = new Bot<MyContext>(CONFIG.TELEGRAM.TOKEN);
 bot.use(session({ initial: (): SessionData => ({ expectingAccount: false }) }));
@@ -20,7 +22,7 @@ bot.on("::mention", async (ctx) => {
   const text = ctx.message?.text;
   const userId = ctx.update.message?.from.id;
 
-  let message = `*${text}* добавлен в список игроков`;
+  let message = `*${text}* добавлен в список`;
   if (userId !== ctx.session.expectingAccount) {
     return;
   }
@@ -45,15 +47,15 @@ bot.on("callback_query:data", async (ctx) => {
     case "removeUser":
       try {
         await deleteUserByName(payload);
-        ctx.reply(`${payload} был удалён из списка игроков`, {
+        ctx.reply(`${payload} был удалён из списка участников☠️`, {
           parse_mode: "Markdown",
         });
       } catch {
-        ctx.reply("Не получилось удалить пользователя. Извиняй");
+        ctx.reply("Не получилось удалить участника. 😱");
       }
       break;
     default:
-      ctx.reply("Неизвестное действие. Ничего делать не буду");
+      ctx.reply("Неизвестное действие. Ничего делать не буду 😝");
   }
 });
 
