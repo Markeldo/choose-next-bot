@@ -32,17 +32,39 @@ export const getUsersOfChat = (chatId: number) => {
   );
 };
 
-export const updateUserByName = async (name: string, lastPicked: number) => {
-  const index = db.data.users.findIndex((user) => name === user.name);
-  db.data.users[index].lastPicked = lastPicked;
+export const updateUserById = async (
+  id: number,
+  chatId: number,
+  lastPicked: number
+) => {
+  const index = db.data.users.findIndex(
+    (user) => id === user.id && chatId === user.chatId
+  );
+
+  if (index === -1) {
+    throw new Error("No user with such id in chatId");
+  }
+  const user = db.data.users.at(index);
+  if (!user) {
+    throw new Error("No user with such id in chatId");
+  }
+  user.lastPicked = lastPicked;
+
+  return await db.write();
+};
+
+export const deleteUserInChat = async (id: number, chatId: number) => {
+  if (
+    db.data.users.findIndex(
+      (user) => id === user.id && chatId === user.chatId
+    ) === -1
+  ) {
+    throw new Error("no user found");
+  }
+  db.data.users = db.data.users.filter(
+    (user) => user.id !== id || chatId !== user.chatId
+  );
+
   await db.write();
   return;
 };
-
-export const deleteUserByName = async (name: string) => {
-  db.data.users = db.data.users.filter((user) => user.name !== name);
-  await db.write();
-  return;
-};
-
-export { db };

@@ -1,7 +1,7 @@
 import { Bot, GrammyError, HttpError, session } from "grammy";
 import { CONFIG } from "./config";
 import { MyContext, SessionData } from "./types";
-import { MENU, addUser, deleteUserByName } from "./model";
+import { MENU, addUser, deleteUserInChat } from "./model";
 import { commands } from "./commands";
 import { isValidTelegramAccount } from "utils";
 
@@ -23,12 +23,16 @@ bot.on("::mention", async (ctx) => {
   const userId = ctx.update.message?.from.id;
 
   let message = `*${text}* добавлен в список`;
-  if (userId !== ctx.session.expectingAccount) {
+  if (userId !== ctx.session.expectingAccount || !ctx.message) {
     return;
   }
 
   if (text && isValidTelegramAccount(text)) {
-    const result = await addUser({ name: text, chatId: ctx.chat.id });
+    const result = await addUser({
+      name: text,
+      chatId: ctx.chat.id,
+      id: ctx.message.from.id,
+    });
 
     if (!result) {
       message = `Пользователь с ником ${text} уже был добавлены в игру ранее. Отмена действия`;
@@ -46,8 +50,11 @@ bot.on("callback_query:data", async (ctx) => {
   switch (action) {
     case "removeUser":
       try {
-        await deleteUserByName(payload);
-        ctx.reply(`${payload} был удалён из списка участников☠️`, {
+        if (!ctx.chat) {
+          throw new Error();
+        }
+        await deleteUserInChat(Number(payload), ctx.chat.id);
+        ctx.reply(`Выбранный пользователь был удалён из списка участников☠️`, {
           parse_mode: "Markdown",
         });
       } catch {

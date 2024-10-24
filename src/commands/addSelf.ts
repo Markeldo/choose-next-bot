@@ -14,6 +14,7 @@ addSelfComposer.command("add_self", async (ctx) => {
     ? `@${ctx.message.from.username}`
     : `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id})`;
   const result = await addUser({
+    id: ctx.message.from.id,
     name: username,
     chatId: ctx.chat.id,
   });
