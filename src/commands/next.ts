@@ -13,6 +13,9 @@ nextComposer.command("next", async (ctx) => {
   const users = sortBy(getUsersOfChat(chatId), [
     ({ lastPicked }) => lastPicked || 0,
   ]).slice(0, MIN_PARTICIPANTS_COUNT);
+
+  ctx.reply(JSON.stringify(users));
+
   if (users.length < MIN_PARTICIPANTS_COUNT) {
     ctx.reply(
       `Невозможно выбрать, потому что нет игроков или их слишком мало! Минимум - ${MIN_PARTICIPANTS_COUNT} 🤕`
