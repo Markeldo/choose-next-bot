@@ -9,6 +9,8 @@ addSelfComposer.command("add_self", async (ctx) => {
     ctx.reply("Не могу добавить пользователя. Ошибка отправки сообщения. ☠️");
     return;
   }
+  console.table(ctx.chat);
+  console.table(ctx.message.message_thread_id);
 
   const username = ctx.message?.from.username
     ? `@${ctx.message.from.username}`
@@ -19,9 +21,13 @@ addSelfComposer.command("add_self", async (ctx) => {
     chatId: ctx.chat.id,
   });
   if (!result) {
-    ctx.reply(`Вы уже были добавлены в список ранее. Отмена действия 🙅‍♂️`);
+    ctx.reply(`Вы уже были добавлены в список ранее. Отмена действия 🙅‍♂️`, {
+      message_thread_id: ctx.message.message_thread_id,
+    });
   } else {
-    ctx.reply(`Поздравляю, ${ctx.message.from.first_name}! Вы добавлены. 👍`);
+    ctx.reply(`Поздравляю, ${ctx.message.from.first_name}! Вы добавлены. 👍`, {
+      message_thread_id: ctx.message.message_thread_id,
+    });
   }
 });
 

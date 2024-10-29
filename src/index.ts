@@ -55,14 +55,19 @@ bot.on("callback_query:data", async (ctx) => {
         }
         await deleteUserInChat(Number(payload), ctx.chat.id);
         ctx.reply(`Выбранный пользователь был удалён из списка участников☠️`, {
-          parse_mode: "Markdown",
+          parse_mode: "HTML",
+          message_thread_id: ctx.callbackQuery?.message?.message_thread_id,
         });
       } catch {
-        ctx.reply("Не получилось удалить участника. 😱");
+        ctx.reply("Не получилось удалить участника. 😱", {
+          message_thread_id: ctx.callbackQuery?.message?.message_thread_id,
+        });
       }
       break;
     default:
-      ctx.reply("Неизвестное действие. Ничего делать не буду 😝");
+      ctx.reply("Неизвестное действие. Ничего делать не буду 😝", {
+        message_thread_id: ctx.callbackQuery?.message?.message_thread_id,
+      });
   }
 });
 

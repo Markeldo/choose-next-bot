@@ -14,9 +14,11 @@ composer.command(["list"], async (ctx) => {
     )
     .join("\n");
   ctx.reply(
-    "*📋 Список участников с датой последнего вызова к доске*\n\n" + result,
+    "<b>📋 Список участников с датой последнего вызова к доске</b>\n\n" +
+      result,
     {
-      parse_mode: "MarkdownV2",
+      parse_mode: "HTML",
+      message_thread_id: ctx.message?.message_thread_id,
     }
   );
 });

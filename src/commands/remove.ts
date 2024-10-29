@@ -18,6 +18,7 @@ removeComposer.command("remove", async (ctx) => {
   });
   await ctx.reply("Выберите участника, которого надо исключить", {
     reply_markup: keyboard,
+    message_thread_id: ctx.message?.message_thread_id,
   });
 });
 

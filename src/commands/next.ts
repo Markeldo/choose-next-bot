@@ -16,7 +16,10 @@ nextComposer.command("next", async (ctx) => {
 
   if (users.length < MIN_PARTICIPANTS_COUNT) {
     ctx.reply(
-      `Невозможно выбрать, потому что нет игроков или их слишком мало! Минимум - ${MIN_PARTICIPANTS_COUNT} 🤕`
+      `Невозможно выбрать, потому что нет игроков или их слишком мало! Минимум - ${MIN_PARTICIPANTS_COUNT} 🤕`,
+      {
+        message_thread_id: ctx.message?.message_thread_id,
+      }
     );
     return;
   }
@@ -24,22 +27,30 @@ nextComposer.command("next", async (ctx) => {
   const selectedUser = users.at(selectedIndex);
 
   if (!selectedUser) {
-    ctx.reply("Какая-то непонятная ошибка возникла. Попробуй ещё раз! 🤕");
+    ctx.reply("Какая-то непонятная ошибка возникла. Попробуй ещё раз! 🤕", {
+      message_thread_id: ctx.message?.message_thread_id,
+    });
     return;
   }
   await ctx.reply(
     `Давненько сидят тихо ${users
       .map(({ name }) => extractName(name))
-      .join(", ")}. Так-так-так... ⏳`
+      .join(", ")}. Так-так-так... ⏳`,
+    {
+      message_thread_id: ctx.message?.message_thread_id,
+    }
   );
   try {
     await updateUserById(selectedUser.id, ctx.chat.id, Date.now());
   } catch {
-    await ctx.reply("Не удалось обновить данные о пользователе");
+    await ctx.reply("Не удалось обновить данные о пользователе", {
+      message_thread_id: ctx.message?.message_thread_id,
+    });
   }
   setTimeout(async () => {
     await ctx.reply(`Следующим ведущим назначается ${selectedUser.name} 🤴`, {
-      parse_mode: "Markdown",
+      message_thread_id: ctx.message?.message_thread_id,
+      parse_mode: "HTML",
     });
   }, 2000);
 });
