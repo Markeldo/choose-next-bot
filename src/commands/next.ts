@@ -50,7 +50,6 @@ nextComposer.command("next", async (ctx) => {
   setTimeout(async () => {
     await ctx.reply(`Следующим ведущим назначается ${selectedUser.name} 🤴`, {
       message_thread_id: ctx.message?.message_thread_id,
-      parse_mode: "HTML",
     });
   }, 2000);
 });
