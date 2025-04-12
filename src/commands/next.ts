@@ -44,7 +44,9 @@ nextComposer.command("next", async (ctx) => {
       }
     );
     try {
+      console.log("before");
       await updateUserById(selectedUser.id, ctx.chat.id, Date.now());
+      console.log("after");
     } catch {
       await ctx.reply("Не удалось обновить данные о пользователе", {
         message_thread_id: ctx.message?.message_thread_id,
