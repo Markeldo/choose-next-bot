@@ -47,18 +47,18 @@ nextComposer.command("next", async (ctx) => {
       message_thread_id: ctx.message?.message_thread_id,
     });
   }
-  //setTimeout(async () => {
-  try {
-    await ctx.reply(`Следующим ведущим назначается ${selectedUser.name} 🤴`, {
-      message_thread_id: ctx.message?.message_thread_id,
-    });
-  } catch (error) {
-    logError(
-      JSON.stringify(error as GrammyError),
-      "Ошибка отправки следующего ведущего"
-    );
-  }
-  //}, 2000);
+  setTimeout(async () => {
+    try {
+      await ctx.reply(`Следующим ведущим назначается ${selectedUser.name} 🤴`, {
+        message_thread_id: ctx.message?.message_thread_id,
+      });
+    } catch (error) {
+      logError(
+        JSON.stringify(error as GrammyError),
+        "Ошибка отправки следующего ведущего"
+      );
+    }
+  }, 2000);
 });
 
 export { nextComposer };
