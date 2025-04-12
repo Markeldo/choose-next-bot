@@ -36,7 +36,9 @@ nextComposer.command("next", async (ctx) => {
     await ctx.reply(
       `Давненько сидят тихо ${users
         .map(({ name }) => extractName(name))
-        .join(", ")}. Так-так-так... ⏳`,
+        .join(", ")}. Так-так-так... ⏳\nСледующим ведущим назначается ${
+        selectedUser.name
+      } 🤴`,
       {
         message_thread_id: ctx.message?.message_thread_id,
       }
@@ -48,10 +50,7 @@ nextComposer.command("next", async (ctx) => {
         message_thread_id: ctx.message?.message_thread_id,
       });
     }
-    await ctx.reply(`Следующим ведущим назначается ${selectedUser.name} 🤴`, {
-      message_thread_id: ctx.message?.message_thread_id,
-    });
-    setTimeout(async () => {
+    /*setTimeout(async () => {
       try {
         await ctx.reply(
           `Следующим ведущим назначается ${selectedUser.name} 🤴`,
@@ -65,7 +64,7 @@ nextComposer.command("next", async (ctx) => {
           "Ошибка отправки следующего ведущего"
         );
       }
-    }, 2000);
+    }, 2000);*/
   } catch (error) {
     logError(
       JSON.stringify(error as GrammyError),
