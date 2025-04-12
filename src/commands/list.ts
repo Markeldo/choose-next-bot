@@ -9,7 +9,11 @@ composer.command(["list"], async (ctx) => {
     .map(
       ({ name, lastPicked }) =>
         `${extractName(name)}:\t${
-          (lastPicked && new Date(lastPicked).toDateString()) || "никогда"
+          (lastPicked &&
+            `${new Date(lastPicked).toDateString()} ${new Date(
+              lastPicked
+            ).toTimeString()}`) ||
+          "никогда"
         }`
     )
     .join("\n");

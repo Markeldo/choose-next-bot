@@ -49,8 +49,8 @@ export const updateUserById = async (
     throw new Error("No user with such id in chatId");
   }
   user.lastPicked = lastPicked;
-
-  return await db.write();
+  await db.write();
+  return;
 };
 
 export const deleteUserInChat = async (id: number, chatId: number) => {
