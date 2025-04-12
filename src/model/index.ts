@@ -54,18 +54,23 @@ export const updateUserById = async (
 };
 
 export const deleteUserInChat = async (id: number, chatId: number) => {
+  console.log("1d");
   if (
     db.data.users.findIndex(
       (user) => id === user.id && chatId === user.chatId
     ) === -1
   ) {
+    console.log("1d error");
     throw new Error("no user found");
   }
+  console.log("2d");
   db.data.users = db.data.users.filter(
     (user) => user.id !== id || chatId !== user.chatId
   );
+  console.log("3d");
 
   await db.write();
+  console.log("4d");
   return;
 };
 
