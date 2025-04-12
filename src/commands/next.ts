@@ -48,6 +48,9 @@ nextComposer.command("next", async (ctx) => {
         message_thread_id: ctx.message?.message_thread_id,
       });
     }
+    await ctx.reply(`Следующим ведущим назначается ${selectedUser.name} 🤴`, {
+      message_thread_id: ctx.message?.message_thread_id,
+    });
     setTimeout(async () => {
       try {
         await ctx.reply(
