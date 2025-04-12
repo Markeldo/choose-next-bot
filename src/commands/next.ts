@@ -1,6 +1,6 @@
-import { Composer } from "grammy";
+import { Composer, GrammyError } from "grammy";
 import { MyContext } from "../types";
-import { getUsersOfChat, updateUserById } from "model";
+import { getUsersOfChat, logError, updateUserById } from "model";
 import { random, sortBy } from "es-toolkit";
 import { extractName } from "utils/extractName";
 
@@ -48,9 +48,16 @@ nextComposer.command("next", async (ctx) => {
     });
   }
   setTimeout(async () => {
-    await ctx.reply(`Следующим ведущим назначается ${selectedUser.name} 🤴`, {
-      message_thread_id: ctx.message?.message_thread_id,
-    });
+    try {
+      await ctx.reply(`Следующим ведущим назначается ${selectedUser.name} 🤴`, {
+        message_thread_id: ctx.message?.message_thread_id,
+      });
+    } catch (error) {
+      logError(
+        JSON.stringify(error as GrammyError),
+        "Ошибка отправки следующего ведущего"
+      );
+    }
   }, 2000);
 });
 

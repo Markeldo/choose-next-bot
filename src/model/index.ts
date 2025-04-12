@@ -4,7 +4,7 @@ import { JSONFilePreset } from "lowdb/node";
 import { cloneDeep } from "es-toolkit";
 export * from "./constants";
 
-const defaultData = { users: [] };
+const defaultData = { users: [], errors: [] };
 let db: Low<Data>;
 async function initDB() {
   return await JSONFilePreset<Data>("./src/db.json", defaultData);
@@ -67,4 +67,14 @@ export const deleteUserInChat = async (id: number, chatId: number) => {
 
   await db.write();
   return;
+};
+
+export const logError = async (error: string, errorText = "Unknown error") => {
+  console.log(error);
+  if (!db.data.errors) {
+    db.data.errors = [];
+  }
+  db.data.errors.push({ error, errorText, createdAt: Date.now() });
+  await db.write();
+  return true;
 };
